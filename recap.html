@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <style>
+    .p1{
+        display: none;
+    }
+    .main{
+        display:flex;
+        align-items: center;
+    }
+    .photo{
+        height: 150px;
+        width: 200px;
+    }
+    .topic{
+        font-size:xx-large;
+        font-style: italic;
+    }
+  </style>
+  <body>
+    <div class="main">
+        <div>
+            <img class="photo" src="https://github.blog/wp-content/uploads/2024/07/github-logo.png">
+        </div>
+        <div>
+            <h1>Github Repository</h1>
+        </div>
+    </div>
+    <div  id="button"> <input type="submit" value="Submit" onclick="fetchh()"/></div>
+    <div class="topic" id="Login"></div>
+    <script>
+      let url = "https://api.github.com/users/Khushiii2511";
+      let b = fetch(url);
+      b.then((data) => {
+        console.log(data);
+        return data.json();
+      })
+        // .then((data) => {
+        //   console.log(data.login);
+        // })
+        // .catch(() => {
+        //   console.log("error");
+        // })
+        // .finally(() => {
+        //   console.log("first");
+        // });
+      async function fetchh() {
+        let url = "https://api.github.com/users/Khushiii2511";
+        let b = await fetch(url);
+        let data = await b.json();
+        // console.log(data)
+        let {login, id} = data
+        const para = document.createElement("p");
+        para.innerHTML ="NAME:"+login;
+        const para2=document.createElement("p");
+        para2.innerHTML ="ID:"+id;
+        let ans=document.getElementById("Login");
+        ans.appendChild(para);
+        ans.appendChild(para2);
+        document.getElementById("button").classList.add("p1");
+
+      }
+     // fetchh();
+    </script>
+  </body>
+</html>
