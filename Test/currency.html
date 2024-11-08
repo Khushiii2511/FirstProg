@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      .parent {
+        border: 2px solid black;
+        background-color: peachpuff;
+        height: 900px;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-evenly;
+        align-items: center;
+        flex-wrap: wrap;
+        align-content: space-evenly;
+        text-align: center;
+      }
+      .box {
+        border: 2px solid black;
+        background-color: rgb(190, 226, 240);
+        height: 300px;
+        width: 700px;
+        padding-top: 40px;
+        box-shadow: black;
+      }
+      .btn {
+        background-color: black;
+        color: white;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="amount">
+      <div class="parent">
+        <div class="box" id="box-1">
+          <h1 align="center">Currency Converter</h1>
+          <br /><br />
+          <label>Amount:<input type="text" id="amount" /></label>
+          <select id="fromCurrency">
+            <option value="dollar">dollar</option></select
+          ><br /><br />
+          <label>Converter:<input type="text" id="converter" /></label>
+          <select id="fromCurrency">
+            <option value="rupee">Rupee</option></select
+          ><br /><br />
+          <button onclick="convertCurrency()">Convert</button>
+        </div>
+      </div>
+    </div>
+    <script>
+      function convertCurrency() {
+        const amount = document.getElementById("amount").value;
+        fetch("https://api.exchangerate-api.com/v4/latest/USD")
+          .then((response) => response.json())
+          .then((data) => {
+            const rate = data.rates["EUR"];
+            const result = amount * rate;
+            document.getElementById("result").value = result.toFixed(2);
+          })
+          .catch((error) => console.error("Error:", error));
+      }
+    </script>
+  </body>
+</html>
